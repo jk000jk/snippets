@@ -62,3 +62,37 @@ int main2()
 	
 	return 0;
 }
+
+
+// 3
+
+#include <stdio.h>
+
+int main()
+{
+ 	int n, v[20][20] = {{0}}, i, maxl, j;
+	
+	printf("n = ");
+	scanf("%d", &n);
+	
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++){
+		  printf("v[%d][%d] ", i, j);
+		  scanf("%d", &v[i][j]);
+		}
+	}
+	
+	for (i = 0; i < n; i++) {
+		maxl = v[i][0];
+		for (j = 0; j < n; j++){
+		   if(v[i][j] > maxl) maxl = v[i][j];			
+		}
+		
+		if(maxl < 0) maxl = -1;
+		printf("Cel mai mare nr pozitiv pe linia %d este: %d \n", i, maxl);
+	}
+		
+	return 0;
+}
+
+// 4
