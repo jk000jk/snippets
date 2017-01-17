@@ -187,3 +187,34 @@ int main()
 		
 	return 0;
 }
+
+
+// 6 
+#include <stdio.h>
+
+int main()
+{
+	int v[20] = {0}, i,  j, s, k;
+	
+	printf("n = ");
+	scanf("%d", &n);
+	
+	for(i = 0; i < n; i++) {
+		printf("v[%d] = ", i);
+		scanf("%d", &v[i]);
+	}
+	
+	for(i = 0; i < n; i++) {
+		if(v[i] > 0) {
+			s = s + v[i];
+			k++;
+		}
+	}
+	
+	if(s == 0) printf("0");
+	else {
+	  printf("Media: %f", (float) s/k);
+	}
+	
+//	fr[v[i] - min]++ translatare
+}
