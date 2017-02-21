@@ -35,5 +35,12 @@ int main(){
 		printf("vneg[%d] = %d \n", i, vneg[i]);
 	}
 	
+	free(v);
+	free(vneg);
+	free(vpoz);
+	
 	return 0;
 }
+
+
+// 2
