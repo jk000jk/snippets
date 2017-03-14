@@ -1,119 +1,27 @@
- 
- // 1
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main() {
-	int i;
-	char v[11] = "aeiouAEIOU", s[100];
-	char *p;	
+int main() {	
+	char s[100], t[20];
+	char *p;
+	int r = 0;
 	
 	printf("s = ");
 	fgets(s, 100, stdin);
+	if(s[strlen(s) - 1] == '\n') s[strlen(s) - 1] = '\0';
 	
-	for (i = 0; i < strlen(s); i++){
-		if(strchr(v, s[i]) != 0){
-			 strcpy(s + i, s + i + 1);	
-			 i--;
-		}
+	printf("t = ");
+	fgets(t, 20, stdin);
+	if(t[strlen(t) - 1] == '\n') t[strlen(t) - 1] = '\0';
+	
+	p = strtok(s, " .,;?!");
+	while(p != NULL){
+		if(strcmp(p, t) == 0) r++;
+		p = strtok(NULL, " .,;?!");
 	}
 	
-	printf("%s", s);
+	printf("%d", r);
 	
 	return 0;
 }
-
-// 2
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-
-int main() {
-	char a[40], b[40];
-	
-	printf("a = ");
-	scanf("%s", a);
-	
-	strcpy(b, a);	
-	if(strcmp(b, strrev(a)) == 0){
-		printf("Palindrom");
-	}else 
-		printf("Not Palindrom");
-		
-	
-	return 0;
-}
-
-// 3
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-
-int main() {
-	char c[20], s[200] = "";
-	int n, i;
-	unsigned lmax = 0;
-	
-	printf("n = ");
-	scanf("%d", &n);
-	
-	for (i = 0; i < n; i++) {
-		scanf("%s", c);
-		if(strlen(c) > lmax){
-			lmax = strlen(c);
-			strcpy(s, c);
-		}else if(strlen(c) == lmax){
-			strcat(s, " ");
-			strcat(s, c);
-		}
-	}		
-	
-	printf("\n");
-	printf("%s", s);
-	
-	return 0;
-}
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-
-int main() {
-	char a[20], b[20];
-	int f[26] = {0}, i; 
-	
-	printf("a: ");
-	scanf("%s", a);
-	
-	getchar();
-	printf("b: ");
-	scanf("%s", b);
-	
-	if(strlen(a) != strlen(b)) {
-		printf("Not Anagrame");
-		return 0;
-	}
-	
-	for (i = 0; i < strlen(a); i++){
-		f[a[i] - 97]++;
-	}
-	
-	for (i = 0; i < strlen(b); i++){
-		f[b[i] - 97]--;
-	}
-	
-	for (i = 0; i < 26; i++){
-		if(f[i] != 0) {
-			printf("Not Anagrame");
-			break;
-		}
-	}	
-	if (i == 26) printf("Anagrame");
-	
-	
-	return 0;
-}
-
-
