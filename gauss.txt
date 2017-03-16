@@ -1,0 +1,67 @@
+A=[1, -2, 1; 2, 1, -3; 4, -7, 1];
+b=[0, 5, 1];
+b=b';
+
+function x = GE(A,b)
+
+[m,n]= size(A);
+if m ~= n
+  disp('Nu e matrice patratica');
+end
+
+for p=1:n
+   array(p)=p;
+endfor
+
+A = [A,b];
+
+for i = 1:n-1
+    pivot = i;
+    % selectam pivot
+    for j = i+1:n
+        if  abs(A(array(i),i)) < abs(A(array(j),j)) % schimbam liniile
+            temp = array(i);
+            array(i) = array(j);
+            array(j) = temp;
+        end
+    end
+
+    while (pivot <= n && A(pivot,i)== 0)
+        pivot = pivot+1;
+    end
+    if pivot > n
+        disp('Nu are solutii unice');
+        break
+    else
+        if pivot > i
+            tem = array(i);
+            array(i) = pivot
+            pivot= tem;
+        end
+    end
+
+    for j = i+1:n
+        m = -A(array(j),i)/A(array(i),i);
+        for k = i+1:n+1
+            A(array(j),k) = A(array(j),k) + m*A(array(i),k);
+        end
+    end
+end
+
+if A(n,n) == 0
+    disp('Nu are solutii unice');
+    return
+end
+
+x(n) = A(array(n),n+1)/A(array(n),n);
+for i = n - 1:-1:1
+    sum = 0;
+    for j = i+1:n
+        sum = sum + A(array(i),j)*x(j);
+    end
+    x(i) = (A(array(i),n+1) - sum)/A(array(i),i);
+end
+
+endfunction
+
+GE(A, b)
