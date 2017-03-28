@@ -20,5 +20,9 @@ int main() {
 		else if	(n < 0) fprintf(fout_neg, "%d ", n);
 	}
 	
+	fclose(fin);
+	fclose(fout_poz);
+	fclose(fout_neg);
+	
 	return 0;
 }
