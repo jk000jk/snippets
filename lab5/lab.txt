@@ -68,7 +68,7 @@ int main() {
 	int k, l = 0;
 	
 	fin = fopen("text.txt", "r");
-	fout = fopen("stats.txt", "w");
+	fout = fopen("stats.csv", "w");
 	if (fin == NULL) {
 		printf("No file!");
 		return 0;
@@ -90,5 +90,7 @@ int main() {
 	
 	return 0;
 }
+
+
 
 
