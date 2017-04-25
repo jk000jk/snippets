@@ -1,2 +1,35 @@
 // 1
 
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+
+int main()
+{
+   int a[10][10], m, n, i, j, l, c;
+   FILE *f = fopen("mat.bin", "wb+");
+   
+   printf("m = ");
+   scanf("%d", &m);
+   
+   printf("n = ");
+   scanf("%d", &n);
+   
+   for (i = 0; i < m; i++){
+	   for (j = 0; j < n; j++){
+		    a[i][j] = rand() % 100;
+	   }
+   }
+   
+   for (i = 0; i < m; i++){
+		for (j = 0; j < n; j++){
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+   }
+
+   fwrite(a, sizeof(int), 10, f);
+   
+   return 0;
+}
+
