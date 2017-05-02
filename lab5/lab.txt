@@ -1,3 +1,11 @@
+/*
+fisierul p.txt contine pe prima linie un nr. nat. n, iar pe urmatoarele n linii, cate o pereche de nr. reale, reprezentand 
+coord. unit pct. in plan.
+
+Sa se afiseze pe ecran distanta maxima intre 2 pct.
+
+
+*/
 
 # include <stdio.h>
 # include <stdlib.h>
