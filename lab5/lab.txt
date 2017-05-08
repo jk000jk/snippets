@@ -1,113 +1,53 @@
 /*
-fisierul p.txt contine pe prima linie un nr. nat. n, iar pe urmatoarele n linii, cate o pereche de nr. reale, reprezentand 
-coord. unit pct. in plan.
-
-Sa se afiseze pe ecran distanta maxima intre 2 pct.
-
-
-*/
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <math.h>
-
-typedef struct 
-{
-	double x,y;
-} Punct2D;
-
-double dist(Punct2D p, Punct2D q) {
-	return sqrt(pow(p.x - q.x, 2) + pow(p.y - q.y, 2));
-}
-
-int main() {
-	Punct2D *v, p1, p2;
-	double dmax, d;
-	int i,j,n;	
-	FILE *f = fopen("p", "r");
-	
-	fscanf(f, "%d", &n);
-	v = (Punct2D*) malloc(n * sizeof(Punct2D));
-	
-	for (i = 0; i < n; i++) 
-		fscanf(f, "%lf %lf", &v[i].x, &v[i].y);
-	fclose(f);
-	
-	dmax = 0; 
-	for (i = 0; i < n - 1; i++) {
-		for (j = i + 1; j < n; j++) {
-			d = dist(v[i], v[j]);
-			if (d > dmax) {
-			   dmax = d;
-			   p1 = v[i];
-			   p2 = v[j];
-			}	
-		}
-	}
-	
-	printf("D. max : %.3lf \n", dmax);
-	printf("P1 : %.2lf %.2lf \n", p1.x, p1.y);
-	printf("P2 : %.2lf %.2lf \n", p2.x, p2.y);
-	
-	return 0;	
-}
-
-
-
-// 2
-
-/*
-Fsierul produse.txt contine pe prima linie un nr. nat. n, iar pe urmatoarele n linii informatii despre cate un produs sun forma
-denumire, cantitate pret.
+Fsierul produse.txt contine pe prima linie un nr. nat. n, iar pe urmatoarele n linii
+informatii despre cate un produs sun forma denumire, cantitate pret.
 
 - sa se scrie in fisierul stock.txt val stocului din fiecare produs, precum si valuarea stocului total
-
 */
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 
-typedef struct 
-{
-   char *dem
-   double cant, pu	   
-}Prod;
-   
-   
-int main()
-{
-	char line[100];
-	Prod *v, *p;
-	int i, n;
-	double t;
-	File *f = fopen("prod.txt", "r");
-	
-	fscanf(f, "%d", &n);
-	v = (Prod*) malloc(n * sizeof(Prod));
-	
-	
-	for (i = 0; i < n; i++){
-		fgets(line, 100, f);
-		p = strtok(line, ",\n");
-		v[i].dem = (char *) malloc(strlen(p)+1);
-		strcpy(v[i].dem, p);
-		p = strtok(NULL, ",\n");
-		sscanf(p, "%lf", &v[i].cant);
-		p = strtok(NULL, ",\n")
-		sscanf(p, "%lf", &v[i].pu);		
-	}
-	fclose(f);
-	
-	File *f = fopen("stock.txt", "w");
-	t = 0;
-	for (i = 0; i < n; i++){ 
-		t = t + v[i].cant * v[i].pu;
-		fprintf(f, "%s,%.2lf \n", v[i].den, v[i].cant * v[i].pu)	
-	}
-	
-	fprintf("Stock total; %.2lf", t);
-	fclose(f);
-	
-	return 0;
+typedef struct {
+    char *dem;
+    double cant, pu;
+} Prod;
+
+
+int main() {
+    char line[100];
+    Prod *v;
+    char *p;
+    int i, n;
+    double t;
+    FILE *f = fopen("prod.txt", "r");
+
+    fscanf(f, "%d", &n);
+    v = (Prod *) malloc(n * sizeof(Prod));
+
+
+    for (i = 0; i < n; i++) {
+        fgets(line, 100, f);
+        p = strtok(line, ",\n");
+        v[i].dem = (char *) malloc(strlen(p) + 1);
+        strcpy(v[i].dem, p);
+        p = strtok(NULL, ",\n");
+        sscanf(p, "%lf", &v[i].cant);
+        p = strtok(NULL, ",\n");
+        sscanf(p, "%lf", &v[i].pu);
+    }
+    fclose(f);
+
+    f = fopen("stock.txt", "w");
+    t = 0;
+    for (i = 0; i < n; i++) {
+        t = t + v[i].cant * v[i].pu;
+        fprintf(f, "%s,%.2lf \n", v[i].dem, v[i].cant * v[i].pu);
+    }
+
+    fprintf(f, "Stock total: %.2lf", t);
+    fclose(f);
+
+    return 0;
 }
-
