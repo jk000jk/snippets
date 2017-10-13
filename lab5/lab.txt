@@ -163,3 +163,74 @@ int main() {
 	return 0;
 }
 
+// 2
+
+class Complex {
+	double re, im;
+
+public:
+	void init(double re, double im);
+	void print();
+	void setRe(double re);
+	void setIm(double im);
+	Complex add(Complex c);
+	// Complex conj();
+};
+
+
+# include <iostream>
+# include "Complex.h"
+
+using namespace std;
+
+
+void Complex::init(double re, double im) {
+	this->re = re;
+	this->im = im;
+}
+
+void Complex::print() {
+	cout << re << " " << im << endl;
+}
+ 
+void Complex::setRe(double re) {
+	this->re = re;
+}
+ 
+void Complex::setIm(double im) {
+	this->im = im;
+}
+
+Complex Complex::add(Complex c) {
+	Complex s; 
+	s.re = this->re + c.re;
+	s.im = this->im + c.im;
+	
+	return s;
+}
+
+
+# include <iostream>
+# include "Complex.h"
+
+using namespace std;
+
+int main() {
+	Complex z1, z2, z3;
+	z1.init(1, 2);
+	z2.init(3, 4);
+	
+	z3 = z1.add(z2);
+	z3.print();
+	
+	(z1.add(z2)).print();
+	
+	z1.setRe(10);
+	z1.print();
+	
+	z2.setIm(20);
+	z2.print();
+	
+	return 0;
+}
+
