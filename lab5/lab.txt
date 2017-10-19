@@ -1,1 +1,187 @@
 // 
+
+#include <iostream>
+
+using namespace std;
+
+struct Nod
+{
+    int info;
+    Nod *link;
+};
+
+Nod *HEAD = NULL;
+
+
+void inserare_la_inceput(int elem_nou) {
+	Nod *node = new Nod;
+	node->info = elem_nou;	
+	node->link = HEAD;
+	HEAD = node;
+}
+
+void inserare_la_sfarsit(int elem_nou) {
+	Nod *node = new Nod;
+	node->info = elem_nou;
+	node->link = NULL;
+	
+	Nod *current = HEAD;
+	while(current != NULL && current->link != NULL) {
+		current = current->link;	
+	}
+	if (current) {
+		current->link = node;
+	} else {
+	    HEAD = node;	
+	}
+}
+
+void stergere_la_inceput() {
+	if (HEAD == NULL) {
+		return;
+	}
+	
+	HEAD = HEAD->link;
+}
+
+
+void inserare_dupa(int elem, int k) {
+	if (HEAD == NULL) {
+		return;
+	}
+	Nod *node = new Nod;
+	node->info = elem;
+	node->link = NULL;	
+	
+}
+
+void stergere_la_sfarsit() {
+	if (HEAD == NULL) {
+		return;
+	}
+	
+	Nod *current = HEAD;
+	while(current != NULL && current->link != NULL && current->link->link != NULL) {
+		current = current->link;	
+	}
+	if (current->link) {
+		current->link = NULL;
+	} else {
+	    HEAD->link = NULL;	
+	}
+}
+
+
+
+void stergere_elem(int elem) {
+	
+}
+
+void accesare_elem(int k) {
+	
+}
+
+void modificare_elem(int k, int elem) {
+	
+}
+
+bool cautare_elem(int elem) {
+	return false;
+}
+
+void creare_lista(int n) {
+	
+}
+
+void afisare_lista() {
+	if (HEAD == NULL) {
+		cout << "..." << endl;
+		return;
+	}
+	
+	Nod *current = HEAD;
+	while (current != NULL) {
+		cout << current->info << "->";
+		current = current->link;
+	}
+	cout << endl;
+}
+
+int main()
+{
+    int elem_nou, dupa, elem_sters;
+
+    cout << "Implementare lista inlantuita" << endl;
+    while(true)
+    {
+    cout << endl << "Operatii posibile:" << endl;
+    cout << "1.Inserare la inceput" << endl;
+    cout << "2.Inserare la sfarsit" << endl;
+    cout << "3.Inserare dupa un element" << endl;
+    cout << "4.Stergere la inceput" << endl;
+    cout << "5.Stergere la sfarsit" << endl;
+    cout << "6.Stergerea unui element dat" << endl;
+    cout << "7.Accesarea unui element dat" << endl;
+    cout << "8.Modificarea unui element dat" << endl;
+    cout << "9.Cautarea unui elem dat" << endl;
+    cout << "10.Creare lista" << endl;
+    cout << "11.Afisare lista" << endl;
+    cout << "Orice alt input---exit" << endl;
+    cout << "Introduceti optiunea: ";
+    int opt;
+    cin >> opt;
+        switch(opt)
+        {
+        case 1:  cout << "Introduceti valoarea de inserat : ";
+                 cin >> elem_nou;
+                 inserare_la_inceput(elem_nou);
+                 break;
+        case 2:  cout << "Introduceti valoarea de inserat : ";
+                 cin >> elem_nou;
+                 inserare_la_sfarsit(elem_nou);
+                 break;
+        case 3:  cout << "Introduceti valoarea de inserat : ";
+                 cin >> elem_nou;
+                 cout << "Dupa ce element?";
+                 cin >> dupa;
+                 inserare_dupa(elem_nou, dupa);
+                 break;
+        case 4:  stergere_la_inceput();
+                 break;
+        case 5:  stergere_la_sfarsit();
+                 break;
+        case 6:  cout << "Introduceti valoarea de sters : ";
+                 cin >> elem_sters;
+                 stergere_elem(elem_sters);
+                 break;
+        case 7:  cout << "Introduceti pozitia elem in lista : ";
+                 int k;
+                 cin >> k;
+                 accesare_elem(k);
+                 break;
+        case 8:  cout << "Introduceti pozitia elem in lista : ";
+                 cin >> k;
+                 cout << "Introduceti noua valoare : ";
+                 cin >> elem_nou;
+                 modificare_elem(k,elem_nou);
+                 break;
+        case 9:  cout << "Introduceti valoarea de cautat : ";
+                 int elem;
+                 cin >> elem;
+                 if(cautare_elem(elem)) cout << "Elementul a fost gasit" << endl;
+                 else cout << "Elementul nu a fost gasit" << endl;
+                 break;
+        case 10:  cout << "nr elem = ";
+                 int n;
+                 cin >> n;
+                 creare_lista(n);
+                 break;
+        case 11: cout << "Lista este:" << endl;
+                 afisare_lista();
+                 break;
+        default: return 0;
+        }
+    }
+
+    return 0;
+}
