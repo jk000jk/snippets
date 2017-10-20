@@ -223,11 +223,11 @@ int main2() {
     return 0;
 }
 
-
 # include <iostream>
 # include <fstream>
 # include <iomanip>
 # include <time.h>
+# include <limits.h>
 
 using namespace std;
 
@@ -239,7 +239,7 @@ using namespace std;
     (nu neaparat strict consecutive))
 */
 
-// O(n^3, t = n^3 * 5 * 10^9, s <= 1s
+// O(n^3), t = n^3 * 5 * 10^-9, s <= 1s
 // n^3 <= 1/5 * 10^9 => n <= 10^3
 void smax3(int v[], int n) {
 	int i, j, k, scrt, smax;
@@ -258,7 +258,7 @@ void smax3(int v[], int n) {
 	}
 }
 
-// O(n^2, t = n^2 * 5 * 10^9, s <= 1s
+// O(n^2), t = n^2 * 5 * 10^9, s <= 1s
 // n^2 <= 1/5 * 10^9 => n <= 3 * 10^4 
 void smax2(int v[], int n) {
 	int i, j, scrt, smax;
@@ -274,6 +274,23 @@ void smax2(int v[], int n) {
 		}
 	}
 }
+
+// O(n), t = n * 5 * 10^-9, s <= 1s
+// n <= 1/5 * 10^9
+void smax(int v[], int n) {
+	int i, j, scrt, smax;
+	smax = INT_MIN;
+	scrt = 0;
+	for (i = 0; i < n; i++) {
+		if (scrt < 0) scrt = v[i];
+		else scrt += v[i];
+		
+		if (scrt > smax) {
+			smax = scrt;
+		}			
+	}
+}
+
 
 int main() {
 	int *v, n;
@@ -302,5 +319,4 @@ int main() {
 	
 	return 0;
 }
-
 
