@@ -317,6 +317,13 @@ int main() {
 	
 	printf("Time n^2: %.03lf \n", t / CLOCKS_PER_SEC);
 	
+
+        t = clock();
+	smax(v, n);
+	t = clock() - t;
+	
+	printf("Time n: %.03lf \n", t / CLOCKS_PER_SEC);
+
 	return 0;
 }
 
