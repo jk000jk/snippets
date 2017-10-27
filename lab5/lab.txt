@@ -1,6 +1,5 @@
 // oop 
 // 1
-
 class Stiva {
   int *v;	
   int dim; // dim max
@@ -8,6 +7,7 @@ class Stiva {
   
   public: 
 	Stiva(int dim);
+	Stiva(Stiva &s);
 	void push(int x);
 	int pop();	
 	void afisare();
@@ -45,6 +45,16 @@ void Stiva::afisare() {
 	}
 }
 
+Stiva::Stiva(Stiva &ob) {
+	this->dim = ob.dim;
+	this->crt = ob.crt;
+	this->v = new int[dim];
+	
+	for (int i = 0; i < crt; i++) {
+		this->v[i] = ob.v[i];
+	}
+}
+
 # include <iostream>
 # include "Stiva.h"
 
@@ -64,4 +74,7 @@ int main() {
 	
 	return 0;
 } 
+
+
+
 
