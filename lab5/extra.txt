@@ -1,79 +1,89 @@
- 
+// Tema implement binary search tree
 
-
-
-
-/*
- * Programul creaza un arbore binar, il tipareste si calculeaza
- * numarul de noduri. Foloseste reprezentarea inlantuita a unui arbore.
- */
 #include <iostream>
-#include <cstdlib>
 using namespace std;
 
 struct NodArb
 {
     int info;
-    NodArb *stang;
-    NodArb *drept;
+   NodArb  *stang;
+    NodArb   *drept;
     };
 
+NodArb *rad= NULL;
 
-
-
-NodArb* creaza_arbore();
-
-void tiparire_arbore(NodArb* rad);
-
- int main()
-{
-  NodArb* rad=NULL;
-  cout<< "Construim arborele...\n";
-  rad = creaza_arbore();
-  cout<<"\n\nTiparire arbore\n\n";
-  tiparire_arbore(rad);
-  cout <<endl<<endl;
-  cout <<endl<<"inaltimea arborelui=" <<inaltime(rad) <<endl;
-  rewind(stdin);
-  getchar();
-  return 0;
-  }
-
-
-NodArb* creaza_arbore()
-{
-   NodArb* rad;
-   char c;
-   cout<<"Introduceti un nod (Y/N)? ";
-
-   cin >>c;
-   if(c=='y'||c=='Y')
-   {
-   rad = new  NodArb;
-   cout<<"Info radacina: ";
-   cin >> rad -> info;
-   cout<<"\nNodul stang al lui " << rad -> info <<endl;
-   rad -> stang = creaza_arbore();
-   cout<<"\nNodul drept al lui " << rad -> info <<endl;
-   rad -> drept = creaza_arbore();
-   }
-   else rad=NULL;
-   return rad;
+int inaltime(NodArb *rad){
+ if(rad==NULL|| rad->drept==NULL && rad->stang==NULL) return 0;
+ int l=inaltime(rad->stang);
+ int r=inaltime(rad->drept);
+ if(l>=r) return l+1;
+ else return r+1;
 }
+ 
+void creaza_arbore()
+{
 
+     int n;cout << "n=";
+        cin >> n;
+        for (int i=1; i<=n; i++)
+        {int a; cin >> a; inserare(a);
+        }
+
+}
 
 void tiparire_arbore(NodArb* rad)
+// tipareste arbore rotit cu 90 grade dreapta
 {
    if(rad==NULL)
-   cout<<"NULL\n";
+   cout <<"NULL\n";
    else
    {
-       cout<<"rad = "<< rad ->info<<endl;
-       cout<<"Subarbore stang al lui  " << rad -> info <<endl;
+      cout <<"rad = "<< rad ->info<<endl;
+       cout <<"Subarbore stang al lui "<< rad -> info<<endl;
        tiparire_arbore(rad -> stang);
-       cout<<"Subarbore drept al lui " << rad -> info <<endl;
+       cout << "Subarbore drept al lui " << rad -> info<<endl;
        tiparire_arbore(rad -> drept);
        }
+
 }
 
+NodArb* cauta(NodArb *rad, int a) {
+	if (rad == NULL) return NULL;
+	
+	if (rad->info == a) {
+			return rad;
+	} else {
+		NodArb *p = cauta(rad->stang, a);
+		return (p != NULL) ? p : cauta(rad->drept, a);
+	}
+}
 
+NodArb* cautabc(NodArb *rad, int a) {
+	if (rad == NULL) return NULL;
+	
+	if (rad->info == a) {
+			return rad;
+	} else {
+		if (rad->info > a) {
+			return cautabc(rad->stanga, a);
+		}
+		return cautabc(rad->dreapt, a)
+	}
+}
+
+int main()
+{
+
+ // printf("Construim arborele...\n");
+  creaza_arbore();
+//  printf("\n\nTiparire arbore\n\n");
+  tiparire_arbore(rad);
+cout << "inaltime="<<inaltime(rad)<<endl;
+
+
+ if (cauta(rad, a)) cout << "gasit";	
+ else cout << "nu a fost gasit";
+
+ return 0;
+
+}
