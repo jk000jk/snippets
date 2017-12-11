@@ -1,0 +1,229 @@
+// main
+
+#include <iostream.h>
+#include "Aplicatie.h"
+#include "Website.h"
+
+using namespace std;
+
+int main()
+{
+    Website w;
+    w.afisare();
+
+    w.setDenumire("aa.com");
+    w.setNrUtilizatori(29);
+
+    w.afisare();
+
+    Website w2 = w;
+    w2.afisare();
+}
+
+// Aplicatie.h
+
+
+#pragma once
+
+class Aplicatie
+{
+    char *denumire;
+    double pret;
+    int nrUtilizatori;
+    int diagonala;
+
+  public:
+    Aplicatie();
+    Aplicatie(char *denumire, double pret, int nrUtilizatori, int diagonala);
+    void afisare();
+    void setDenumire(char *denumire);
+    void setPret(double pret);
+    void setNrUtilizatori(int nrUtilizatori);
+    void setDiagonala(int diagonala);
+    char *getDenumire();
+    double getPret();
+    int getNrUtilizatori();
+    int getDiagonala();
+    Aplicatie(const Aplicatie &ob);
+    ~Aplicatie();
+    Aplicatie &operator=(const Aplicatie &ob);
+};
+
+// Aplicatie.cpp
+
+
+#include <iostream.h>
+#include "string.h"
+#include "Aplicatie.h"
+
+Aplicatie::Aplicatie()
+{
+    denumire = new char[4];
+    strcpy(denumire, "####");
+    pret = 0.0;
+    nrUtilizatori = 0;
+    diagonala = 15;
+}
+
+Aplicatie::Aplicatie(char *denumire, double pret, int nrUrilizatori, int diagonala)
+{
+    this->denumire = new char[strlen(denumire) + 1];
+    strcpy(this->denumire, denumire);
+    this->pret = pret;
+    this->nrUtilizatori = nrUtilizatori;
+    this->diagonala = diagonala;
+}
+
+void Aplicatie::afisare()
+{
+    cout << denumire << endl
+         << pret << endl
+         << nrUtilizatori << endl
+         << diagonala << endl;
+}
+
+void Aplicatie::setDenumire(char *denumire)
+{
+    if (this->denumire)
+    {
+        delete[] this->denumire;
+    }
+    this->denumire = new char[strlen(denumire) + 1];
+    strcpy(this->denumire, denumire);
+}
+
+void Aplicatie::setPret(double pret)
+{
+    this->pret = pret;
+}
+
+void Aplicatie::setNrUtilizatori(int nrUtilizatori)
+{
+    this->nrUtilizatori = nrUtilizatori;
+}
+
+void Aplicatie::setDiagonala(int diagonala)
+{
+    this->diagonala = diagonala;
+}
+
+char *Aplicatie::getDenumire()
+{
+    return denumire;
+}
+
+double Aplicatie::getPret()
+{
+    return pret;
+}
+
+int Aplicatie::getNrUtilizatori()
+{
+    return nrUtilizatori;
+}
+
+int Aplicatie::getDiagonala()
+{
+    return diagonala;
+}
+
+Aplicatie::~Aplicatie()
+{
+    if (this->denumire)
+    {
+        delete[] denumire;
+    }
+}
+
+Aplicatie::Aplicatie(const Aplicatie &ob)
+{
+    this->denumire = new char[strlen(ob.denumire) + 1];
+    strcpy(this->denumire, ob.denumire);
+    this->pret = ob.pret;
+    this->nrUtilizatori = ob.nrUtilizatori;
+    this->diagonala = ob.diagonala;
+}
+
+Aplicatie &Aplicatie::operator=(const Aplicatie &ob)
+{
+    if (this->denumire)
+    {
+        delete[] denumire;
+    }
+    this->denumire = new char[strlen(ob.denumire) + 1];
+    strcpy(this->denumire, ob.denumire);
+    this->pret = ob.pret;
+    this->nrUtilizatori = ob.nrUtilizatori;
+    this->diagonala = ob.diagonala;
+    return *this;
+}
+
+// Website.h
+
+#include "Aplicatie.h"
+
+class Website : public Aplicatie
+{
+    int nrPagini;
+    bool ptMobil;
+
+  public:
+    Website();
+    Website(char *denumire, double pret, int nrUtilizatori, int diagonala, int nrPagini, bool ptMobil);
+    void afisare();
+    void setNrPagini(int nrPagini);
+    void setPtMobil(bool ptMobil);
+    int getNrPagini();
+    bool isPtMobil();
+    Website(const Website &ob);
+    ~Website();
+};
+
+// Website.cpp
+
+#include <iostream.h>
+#include "Website.h"
+#include "Aplicatie.h"
+#include <string.h>
+
+using namespace std;
+
+Website::Website() : Aplicatie() {
+	nrPagini = 0;
+	ptMobil = false;
+}
+
+Website::Website(char* denumire, double pret, int nrUtilizatori, int diagonala, int nrPagini, bool ptMobil) 
+	: Aplicatie(denumire, pret, nrUtilizatori, diagonala) {
+	this->nrPagini = nrPagini;
+	this->ptMobil = ptMobil;
+}
+
+void Website::afisare() {
+	Aplicatie::afisare();
+	cout << nrPagini << endl
+		<< ptMobil << endl;
+}
+
+void Website::setNrPagini(int nrPagini) {
+	this->nrPagini = nrPagini;
+}
+
+void Website::setPtMobil(bool ptMobil) {
+	this->ptMobil = ptMobil;
+}
+
+int Website::getNrPagini() {
+	return nrPagini;
+}
+
+bool Website::isPtMobil() {
+	return ptMobil;
+}
+
+Website::Website(const Website &ob) : Aplicatie(ob) {
+	nrPagini = ob.nrPagini;
+	ptMobil = ob.ptMobil;
+}
+
+Website::~Website(){}
