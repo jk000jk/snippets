@@ -22,7 +22,7 @@ int main() {
     int *a;
     int *b;
 
-    cout << "n = ";
+    cout << "N = ";
     cin >> n;
     a = new int[n];
     b = new int[n];
