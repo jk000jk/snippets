@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include<algorithm>
 
 using namespace std;
 
@@ -7,7 +8,7 @@ using namespace std;
 /*
  * Fie mulţimile A={a1,a2,...,an} şi B={b1, b2,...,bn}. Să se determine o
  * permutare a elementelor mulţimii A şi respectiv o permutare a elementelor mulţimii B
- * astfel încât valoarea sumei (ak-bk)^2 să fie maximă.
+ * astfel încât valoarea sumei (ak - bk)^2 să fie maximă.
  *
  */
 
@@ -21,7 +22,7 @@ int main() {
     int *a;
     int *b;
 
-    cout << "N = ";
+    cout << "n = ";
     cin >> n;
     a = new int[n];
     b = new int[n];
