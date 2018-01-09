@@ -37,10 +37,13 @@ void backtracking(vector<int> pasi, int s, int *nr) {
 }
 
 int main() {
-    int nrpasi = 0;
+    int nrpasi = 0, n;
     vector<int> r;
 
-    backtracking(r, 4, &nrpasi);
+    cout << "n = ";
+    cin >> n;
+
+    backtracking(r, n, &nrpasi);
 
     cout << endl << "Moduri: " << nrpasi << endl;
 
