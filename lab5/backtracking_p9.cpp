@@ -14,7 +14,7 @@ using namespace std;
 
 
 void printmod(vector<int> *pasi) {
-    for (int i = 0; i < pasi->size(); i++) {
+    for (unsigned i = 0; i < pasi->size(); i++) {
         cout << (*pasi)[i] << " ";
     }
     cout << endl;
