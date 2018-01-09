@@ -6,7 +6,7 @@ using namespace std;
 
 
 /*
- * Fie mulţimile A={a1,a2,...,an} şi B={b1, b2,...,bn}. Să se determine o
+ * 5. Fie mulţimile A={a1,a2,...,an} şi B={b1, b2,...,bn}. Să se determine o
  * permutare a elementelor mulţimii A şi respectiv o permutare a elementelor mulţimii B
  * astfel încât valoarea sumei (ak - bk)^2 să fie maximă.
  *
