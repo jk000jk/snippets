@@ -6,9 +6,9 @@ using namespace std;
 
 
 /*
- * 5. Fie mulţimile A={a1,a2,...,an} şi B={b1, b2,...,bn}. Să se determine o
- * permutare a elementelor mulţimii A şi respectiv o permutare a elementelor mulţimii B
- * astfel încât valoarea sumei (ak - bk)^2 să fie maximă.
+ * 5. Fie mulţimile A={a1,a2,...,an} şi B={b1, b2,...,bn}. Să se determine o
+ * permutare a elementelor mulţimii A şi respectiv o permutare a elementelor mulţimii B
+ * astfel încât valoarea sumei (ak - bk)^2 să fie maximă.
  *
  */
 
@@ -18,9 +18,10 @@ bool cmp(int a, int b) {
 }
 
 int main() {
-    int i, n, smax = 0;
+    int i, n;
     int *a;
     int *b;
+    double smax = 0;
 
     cout << "n = ";
     cin >> n;
@@ -58,3 +59,4 @@ int main() {
 
     return 0;
 }
+
