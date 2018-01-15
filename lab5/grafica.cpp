@@ -79,9 +79,11 @@ int main(int argc, char** argv)
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_POLYGON);   //initializare desen poligon
-	glVertex2f(0.0, 00.0); //stabilire coordonate triunghi glVertex2f(200.0,200.0);//stabilire coordonate triunghi glVertex2f(00.0,200.0);//stabilire coordonate triunghi
-	glEnd();			   //sfisit desenare
+	glBegin(GL_POLYGON);   // initializare desen poligon
+	glVertex2f(0.0, 00.0); // stabilire coordonate triunghi 
+	glVertex2f(200.0,200.0);// stabilire coordonate triunghi 
+	glVertex2f(00.0,200.0);// stabilire coordonate triunghi
+	glEnd();			   // sfisit desenare
 	//executare functie
 	glFlush();
 	glPointSize(40.0);
@@ -96,7 +98,7 @@ void display()
 	glFlush();
 }
 void reshape(int w, int h)						//functia redesenare {
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);   //stabilirea viewportului la dimensiunea ferestrei
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);   // stabilirea viewportului la dimensiunea ferestrei
 glMatrixMode(GL_PROJECTION);					//specificare matrice modificabila la valoare argumentului de modificare
 glLoadIdentity();								//initializarea sistemului de coordonate
 gluOrtho2D(0.0, (GLdouble)w, 0.0, (GLdouble)h); //stabileste volumul de vedere folosind o proiectie ortografica
