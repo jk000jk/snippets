@@ -256,3 +256,5 @@ int main(int argc, char **argv)
 	glutMainLoop();
 	return 0;
 }
+
+https://gyazo.com/829393b64dc1a6b00ec7443674df19f8
