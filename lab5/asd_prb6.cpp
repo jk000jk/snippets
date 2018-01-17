@@ -160,3 +160,18 @@ int main() {
 // Post Order: 2 3 * 2 1 - / 5 4 1 - * + 
 // Pre Order: + 2 3 * 2 1 - / 5 4 1 - * 
 // In Order: 2 3 * 2 1 - / + 5 4 1 - * 
+
+/*
+
+
+    An operand in an infix expression belongs to either the right child of the operator in front of it, 
+    or the left child of the operator behind it.
+
+    If an operator OP2 has higher precedence than its preceding operator OP1, the previous operand x 
+    becomes the left child of OP2, and OP2 becomes the right child of OP1.
+
+    If an operator OP2 has lower precedence than its preceding operator OP1, the previous operand x 
+    becomes the right child of OP1. Go up the tree from OP1, compare the precedence of each ancestor of 
+    OP1 with that of OP2 until OP2 <= ancestor OP. Then OP2 becomes the right child of OP.
+
+*/
