@@ -52,8 +52,21 @@ int Precedenta(const string &x) {
     else return 1;
 }
 
+/*
+    Un operand apartine fiului drept al operatorului din fata sa sau fiului stang al operatorlui 
+    din spatele sau.
+
+    Daca un operator OP2 are o precedenta mai mare decat operatorul sau precedent OP1, operandul precedent x
+    devine fiul stang al OP2, si OP2 devine fiul drept al OP1.
+
+    Daca un operator OP2 are o precedenta mai mica decaut operatorul sau precedent OP1, operandul precedent x
+    devine fiul drept al OP1. Mergem in sus pe arbore de la OP1, comparand precedenta fiecarui parinte
+	al OP1 cu precedenta OP2 pana cand OP2 <= parintele OP. Atunci OP2 devine fiul drept al OP. 
+
+*/
+
 PNod CreazaArbore(const string &exp) {
-    PNod root = CreazaNod("0"); // un root oarecare cu precedenta minima
+    PNod root = CreazaNod("0"); // un nod radacina oarecare cu precedenta minima
     root->precedenta = INT_MIN;
 
     PNod preOperand = NULL; // operandul din inaintea operatorului curent
@@ -153,6 +166,7 @@ int main() {
     InOrderPrint(root);
     cout << endl;
 }
+
 
 
 // Exp: 2 * 3 / ( 2 - 1 ) + 5 * ( 4 - 1 )
