@@ -33,3 +33,76 @@ public class Main {
     }
 
 }
+
+
+
+// last 3
+
+package javaapplication1;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+
+
+public class Main {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {  
+        File file = new File("C:/Users/User7/Desktop/New Folder/file.txt");
+        FileReader reader = null;
+        char[] chars = new char[(int) file.length()];
+        try {
+            reader = new FileReader(file);  
+            reader.read(chars);
+            reader.close();
+        } catch (IOException e) {
+           System.out.println(e.getMessage());
+        } finally {
+            if(reader !=null ) {
+                try {
+                reader.close();
+                } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                }
+            }
+        }
+        
+        HashMap<Character, Integer> hmap = new HashMap<Character, Integer>();
+        for (int i = 0; i < chars.length; i++) {
+            if (hmap.containsKey(chars[i])) {
+                 hmap.put(chars[i], hmap.get(chars[i]) + 1);
+            } else {
+                 hmap.put(chars[i], 1);
+            }       
+        }
+
+        for (int i = 0; i < chars.length; i++) {
+            System.out.println(chars[i] + ": " + hmap.get(chars[i])/(float)chars.length * 100 + "%");
+        }
+
+        int buffersize = 1000;
+        int offset = 0;
+        byte[] binData = new byte[buffersize];
+
+       FileInputStream filebin = null;
+       int numBytesRead;
+       try {
+           filebin = new FileInputStream("C:/Users/User7/Desktop/New Folder/file.bin");
+           while((numBytesRead = filebin.read(binData, offset, buffersize)) != -1)
+            {
+               
+                 offset += numBytesRead;
+            }
+       } catch (Exception e) {
+           System.out.println(e.getMessage());
+        }
+        
+        System.out.println(filebin.toString());
+    }
+
+}
