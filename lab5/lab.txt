@@ -38,6 +38,14 @@ public class Main {
        System.out.println("Redundancy: " + redundancy);
        System.out.println("Efficiency: " + efficiency);
 
+       double prob = 0.0;
+       for (Character key : hmap.keySet()) {
+            prob += hmap.get(key)/(float)chars.length;
+       }
+
+       System.out.println();
+       System.out.println(prob);
+
        System.out.println("---------------------------");
        System.out.println();
        
@@ -76,6 +84,11 @@ public class Main {
          System.out.println("Efficiency: " + efficiencybin);
          System.out.println();
 
+         double probbin = 0.0;
+         for (Byte key : hmap2.keySet()) {
+            probbin += hmap2.get(key)/(float)binData.length;
+        }
+        System.out.println(probbin);
     }
 
     private static double entropy( HashMap<Byte, Integer> hmap, int length) {
@@ -101,6 +114,7 @@ public class Main {
     }
 
 }
+
 
 
 
