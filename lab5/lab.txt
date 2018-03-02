@@ -5,7 +5,6 @@
 package javaapplication4;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Main {
@@ -38,52 +37,33 @@ public class Main {
        System.out.println("-----");
 
         File filebin = new File("C:/Users/User7/Desktop/NewFolder/file.bin");
-        char[] charsbin = new char[(int) filebin.length()];
+        byte[] binData = new byte [(int)filebin.length()];
         try {
-           FileReader reader = new FileReader(filebin);
-           reader.read(charsbin);
+           FileInputStream reader = new FileInputStream(filebin);
+           reader.read(binData);
            reader.close();
         } catch (IOException e) {
            System.out.println(e.getMessage());
         }
 
-        System.out.println(charsbin[1]);
-//       try {
-//
-//           
-//          InputStream inputStream = new FileInputStream("C:/Users/User7/Desktop/NewFolder/file.bin");
-//          int bit;
-//          int i = 0;
-//          int bytenum = 0;
-//          while ((bit = inputStream.read()) != -1) {
-//               bytenum += bit * Math.pow(2, i);
-//               System.out.println(bytenum);
-//               if (i % 8 == 0) {
-//                   // System.out.println(bytenum);
-//                   i = 0;
-//               }
-//               i++;
-//          }
-//        } catch (IOException e) {
-//           System.out.println(e.getMessage());
-//        }
+        HashMap<Byte, Integer> hmap2 = new HashMap<Byte, Integer>();
+        for (int i = 0; i < binData.length; i++) {
+            if (hmap2.containsKey(binData[i])) {
+                 hmap2.put(binData[i], hmap2.get(binData[i]) + 1);
+            } else {
+                 hmap2.put(binData[i], 1);
+            }
+        }
 
-//        HashMap<Character, Integer> hmap2 = new HashMap<Character, Integer>();
-//        for (int i = 0; i < binData.length; i++) {
-//            if (hmap2.containsKey(binData[i])) {
-//             //    hmap2.put(binData[i], hmap2.get(binData[i]) + 1);
-//            } else {
-//               //  hmap2.put(binData[i], 1);
-//            }
-//        }
 
-//        for (char key : hmap2.keySet()) {
-//            System.out.println(key + ": "
-//                    + hmap2.get(key)/(float)hmap2.keySet().size() * 100 + "%");
-//        }
+        for (Byte key : hmap2.keySet()) {
+            System.out.println(key + ": "
+                    + hmap2.get(key)/(float)binData.length * 100 + "%");
+        }
     }
 
 }
+
 
 
 
