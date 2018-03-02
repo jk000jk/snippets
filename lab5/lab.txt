@@ -137,3 +137,98 @@ public class ExTables2 {
     }
 }
 
+
+// 3
+
+
+package Source;
+
+
+public class Employe {
+    private String name;
+    private int age;
+    private static String company = "BestIT";
+    private double paycheck;
+
+    public Employe(String name, int age, double paycheck) {
+        this.name = name;
+        this.age = age;
+        this.paycheck = paycheck;
+    }
+
+    public Employe() {
+        this("####", 18, 1900.00);
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public static String getCompany() {
+        return company;
+    }
+
+    public static void setCompany(String company) {
+        Employe.company = company;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPaycheck() {
+        return paycheck;
+    }
+
+    public void setPaycheck(double paycheck) {
+        this.paycheck = paycheck;
+    }
+    
+    public String toString() {
+        return name + " " + age + " " + paycheck;
+    }
+}
+
+
+
+package Source;
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Ins {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.print("n = ");
+        int n = s.nextInt();
+
+        Employe v[] = new Employe[n];
+        String name;
+        int age;
+        double paycheck;
+
+        for (int i = 0; i < v.length; i++) {
+            System.out.print("Name = ");
+            name = s.next();
+
+            System.out.print("Age = ");
+            age = s.nextInt();
+
+            System.out.print("Paycheck = ");
+            paycheck = s.nextDouble();
+
+            v[i] = new Employe(name, age, paycheck);
+        }
+
+        System.out.println(Arrays.toString(v));
+    }
+}
+
