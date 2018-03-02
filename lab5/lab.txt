@@ -149,11 +149,16 @@ public class Employe {
     private int age;
     private static String company = "BestIT";
     private double paycheck;
+    private static int interns;
 
     public Employe(String name, int age, double paycheck) {
         this.name = name;
         this.age = age;
         this.paycheck = paycheck;
+
+        if (this.age <= 25) {
+            interns++;
+        }
     }
 
     public Employe() {
@@ -195,7 +200,12 @@ public class Employe {
     public String toString() {
         return name + " " + age + " " + paycheck;
     }
+
+    public static int getInterns() {
+        return interns;
+    }
 }
+
 
 
 
@@ -229,6 +239,7 @@ public class Ins {
         }
 
         System.out.println(Arrays.toString(v));
+        System.out.println(Employe.getInterns());
     }
 }
 
