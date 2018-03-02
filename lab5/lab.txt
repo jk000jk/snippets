@@ -1,6 +1,3 @@
-
-
-// last 3
 package javaapplication4;
 
 import java.io.*;
@@ -32,9 +29,17 @@ public class Main {
         for (Character key : hmap.keySet()) {
             System.out.println(key + ": "
                     + hmap.get(key)/(float)chars.length * 100 + "%");
-        }
+       }
+       double entropy = entropyc(hmap, chars.length);
+       double entropymax = Log2(chars.length) - entropy;
+       double redundancy = Log2(chars.length) - entropy;
+       double efficiency = entropy / Log2(256);
+       System.out.println("Entropy: " + entropy);
+       System.out.println("Redundancy: " + redundancy);
+       System.out.println("Efficiency: " + efficiency);
 
-       System.out.println("-----");
+       System.out.println("---------------------------");
+       System.out.println();
        
         HashMap<Byte, Integer> hmap2 = new HashMap<Byte, Integer>();
         File filebin = new File("C:/Users/User7/Desktop/NewFolder/file.bin");
@@ -61,12 +66,41 @@ public class Main {
             System.out.println(key + ": "
                     + hmap2.get(key)/(float)binData.length * 100 + "%");
         }
+
+         double entropybin = entropy(hmap2, binData.length);
+         double entropymaxbin = Log2(binData.length) - entropybin;
+         double redundancybin = entropymaxbin - entropybin;
+         double efficiencybin = entropymaxbin / Log2(256);
+         System.out.println("Entropy: " + entropybin);
+         System.out.println("Redundancy: " + redundancybin);
+         System.out.println("Efficiency: " + efficiencybin);
+         System.out.println();
+
+    }
+
+    private static double entropy( HashMap<Byte, Integer> hmap, int length) {
+        double entropy = 0;
+        for (Byte key : hmap.keySet()) {
+             double prob = (double) hmap.get(key)/length;
+             entropy -= prob * Log2(prob);
+        }
+        return entropy;
+    }
+
+     private static double entropyc(HashMap<Character, Integer> hmap, int length) {
+        double entropy = 0;
+        for (Character key : hmap.keySet()) {
+             double prob = (double) hmap.get(key)/length;
+             entropy -= prob * Log2(prob);
+        }
+        return entropy;
+    }
+
+    private static double Log2(double n) {
+           return Math.log(n) / Math.log(2);
     }
 
 }
-
-
-
 
 
 
