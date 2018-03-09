@@ -31,7 +31,7 @@ public class Main {
                     + hmap.get(key)/(float)chars.length * 100 + "%");
        }
        double entropy = entropyc(hmap, chars.length);
-       double redundancy = Log2(hmap.keySet().size()) - entropy;
+       double redundancy = Log2(256) - entropy;
        double efficiency = entropy / Log2(256);
        System.out.println("Entropy: " + entropy);
        System.out.println("Redundancy: " + redundancy);
@@ -112,6 +112,7 @@ public class Main {
     }
 
 }
+
 
 
 
