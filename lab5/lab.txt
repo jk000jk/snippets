@@ -316,3 +316,236 @@ public class Ins {
     }
 }
 
+
+
+// Lab 3
+
+package javaapplication5;
+
+public abstract class EmployeUTM {
+    private String name;
+    private double basePaycheck;
+    private static String college = "UTM";
+
+    public EmployeUTM(String name, double basePaycheck) {
+        this.name = name;
+        this.basePaycheck = basePaycheck;
+    }
+
+    public EmployeUTM() {
+        this("####", 1900.00);
+    }
+
+    public double getBasePaycheck() {
+        return basePaycheck;
+    }
+
+    public void setBasePaycheck(double basePaycheck) {
+        this.basePaycheck = basePaycheck;
+    }
+
+    public static String getCollege() {
+        return college;
+    }
+
+    public static void setCollege(String college) {
+        EmployeUTM.college = college;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EmployeUTM other = (EmployeUTM) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if (this.basePaycheck != other.basePaycheck) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.basePaycheck) ^ (Double.doubleToLongBits(this.basePaycheck) >>> 32));
+        return hash;
+    }
+    
+    @Override
+    public String toString() {
+        return name + " " + basePaycheck;
+    }
+    
+    public abstract double calcPaycheck();
+
+}
+
+
+
+
+package javaapplication5;
+
+
+public class Teacher extends EmployeUTM {
+    private String course;
+    private double coursePay;
+    private int nrCourses;
+
+    public Teacher(String name, double basePaycheck, String course, double coursePay, int nrCourses) {
+        super(name, basePaycheck);
+        this.course = course;
+        this.coursePay = coursePay;
+        this.nrCourses = nrCourses;
+    }
+
+    public Teacher() {
+        this("name", 0.0, "course", 0.0, 0);
+    }
+    
+    
+    @Override
+    public double calcPaycheck() {
+        return this.getBasePaycheck() + this.nrCourses * this.coursePay;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public double getCoursePay() {
+        return coursePay;
+    }
+
+    public void setCoursePay(double coursePay) {
+        this.coursePay = coursePay;
+    }
+
+    public int getNrCourses() {
+        return nrCourses;
+    }
+
+    public void setNrCourses(int nrCourses) {
+        this.nrCourses = nrCourses;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Teacher other = (Teacher) obj;
+        if ((this.course == null) ? (other.course != null) : !this.course.equals(other.course)) {
+            return false;
+        }
+        if (this.coursePay != other.coursePay) {
+            return false;
+        }
+        if (this.nrCourses != other.nrCourses) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (this.course != null ? this.course.hashCode() : 0);
+        hash = 31 * hash + (int) (Double.doubleToLongBits(this.coursePay) ^ (Double.doubleToLongBits(this.coursePay) >>> 32));
+        hash = 31 * hash + this.nrCourses;
+        return hash;
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() +  " " + this.course  + " " + this.nrCourses + " " + this.coursePay;
+    }
+}
+
+
+
+package javaapplication5;
+
+
+public class Tesa extends EmployeUTM {
+    private String position;
+    private static double bonus = 0.15;
+    
+    @Override
+    public double calcPaycheck() {
+        return getBasePaycheck() + getBasePaycheck() * bonus;
+    }
+
+    public Tesa(String name, double basePaycheck, String position) {
+        super(name, basePaycheck);
+        this.position = position;
+    }
+
+    public Tesa() {
+        super();
+        this.position = "";
+    }
+
+    public static double getBonus() {
+        return bonus;
+    }
+
+    public static void setBonus(double bonus) {
+        Tesa.bonus = bonus;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tesa other = (Tesa) obj;
+        if ((this.position == null) ? (other.position != null) : !this.position.equals(other.position)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + (this.position != null ? this.position.hashCode() : 0);
+        return hash;
+    }
+    
+    public String toString() {
+        return super.toString() + " " + position;
+    }
+}
