@@ -174,8 +174,7 @@ public class ExTables2 {
 // 3
 
 
-package Source;
-
+package javaapplication5;
 
 public class Employe {
     private String name;
@@ -229,7 +228,7 @@ public class Employe {
     public void setPaycheck(double paycheck) {
         this.paycheck = paycheck;
     }
-    
+
     public String toString() {
         return name + " " + age + " " + paycheck;
     }
@@ -237,18 +236,59 @@ public class Employe {
     public static int getInterns() {
         return interns;
     }
+
+    @Override
+    public boolean equals(Object ob) {
+        if (ob == this) {
+           return true;
+        }
+
+        if (ob == null) {
+            return false;
+        }
+
+        if (this.getClass() != ob.getClass()) {
+            return false;
+        }
+
+        final Employe ob2 = (Employe) ob;
+
+        if ((this.name == null) ? (ob2.name != null) : !this.name.equals(ob2.name)) {
+            return false;
+        }
+
+        if (age != ob2.age) {
+            return false;
+        }
+
+        if (paycheck != ob2.paycheck) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
 
 
 
 
-package Source;
+
+package javaapplication5;
 
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Ins {
     public static void main(String[] args) {
+    
+        Employe ob1 = new Employe("Name", 23, 4005.3);
+        Employe ob2 = new Employe("Name", 23, 4005.3);
+        Employe ob3 = ob1;
+
+        System.out.println(ob1 == ob2);
+        System.out.println(ob1.equals(ob2));
+        
         Scanner s = new Scanner(System.in);
         System.out.print("n = ");
         int n = s.nextInt();
