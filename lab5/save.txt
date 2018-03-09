@@ -1,0 +1,114 @@
+package javaapplication4;
+
+import java.io.*;
+import java.util.HashMap;
+
+public class Main {
+
+    public static void main(String[] args) {
+        HashMap<Character, Integer> hmap = new HashMap<Character, Integer>();
+        File file = new File("C:/Users/User7/Desktop/NewFolder/file.txt");
+        char[] chars = new char[(int) file.length()];
+        try {
+           FileReader reader = new FileReader(file);
+           reader.read(chars);
+           reader.close();
+        } catch (IOException e) {
+           System.out.println(e.getMessage());
+        }
+
+     
+        for (int i = 0; i < chars.length; i++) {
+            if (hmap.containsKey(chars[i])) {
+                 hmap.put(chars[i], hmap.get(chars[i]) + 1);
+            } else {
+                 hmap.put(chars[i], 1);
+            }
+        }
+
+        for (Character key : hmap.keySet()) {
+            System.out.println(key + ": "
+                    + hmap.get(key)/(float)chars.length * 100 + "%");
+       }
+       double entropy = entropyc(hmap, chars.length);
+       double redundancy = Log2(256) - entropy;
+       double efficiency = entropy / Log2(256);
+       System.out.println("Entropy: " + entropy);
+       System.out.println("Redundancy: " + redundancy);
+       System.out.println("Efficiency: " + efficiency);
+
+       double prob = 0.0;
+       for (Character key : hmap.keySet()) {
+            prob += hmap.get(key)/(float)chars.length;
+       }
+
+       System.out.println();
+       System.out.println(prob);
+
+       System.out.println("---------------------------");
+       System.out.println();
+       
+        HashMap<Byte, Integer> hmap2 = new HashMap<Byte, Integer>();
+        File filebin = new File("C:/Users/User7/Desktop/NewFolder/flower.bmp");
+        byte[] binData = new byte [(int)filebin.length()];
+        try {
+           FileInputStream reader = new FileInputStream(filebin);
+           reader.read(binData);
+           reader.close();
+        } catch (IOException e) {
+           System.out.println(e.getMessage());
+        }
+
+       
+        for (int i = 0; i < binData.length; i++) {
+            if (hmap2.containsKey(binData[i])) {
+                 hmap2.put(binData[i], hmap2.get(binData[i]) + 1);
+            } else {
+                 hmap2.put(binData[i], 1);
+            }
+        }
+
+
+        for (Byte key : hmap2.keySet()) {
+            System.out.println(key + ": "
+                    + hmap2.get(key)/(float)binData.length * 100 + "%");
+        }
+
+         double entropybin = entropy(hmap2, binData.length);
+         double redundancybin = Log2(2) - entropybin;
+         double efficiencybin = entropybin / Log2(2);
+         System.out.println("Entropy: " + entropybin);
+         System.out.println("Redundancy: " + redundancybin);
+         System.out.println("Efficiency: " + efficiencybin);
+         System.out.println();
+
+         double probbin = 0.0;
+         for (Byte key : hmap2.keySet()) {
+            probbin += hmap2.get(key)/(float)binData.length;
+        }
+        System.out.println(probbin);
+    }
+
+    private static double entropy(HashMap<Byte, Integer> hmap, int length) {
+        double entropy = 0;
+        for (Byte key : hmap.keySet()) {
+             double prob = (double) hmap.get(key)/length;
+             entropy -= prob * Log2(prob);
+        }
+        return entropy;
+    }
+
+     private static double entropyc(HashMap<Character, Integer> hmap, int length) {
+        double entropy = 0;
+        for (Character key : hmap.keySet()) {
+             double prob = (double) hmap.get(key)/length;
+             entropy -= prob * Log2(prob);
+        }
+        return entropy;
+    }
+
+    private static double Log2(double n) {
+           return Math.log(n) / Math.log(2);
+    }
+
+}
