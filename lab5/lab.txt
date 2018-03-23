@@ -1,1 +1,160 @@
 
+package javaapplication9;
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        StudentUTM[] tob = new StudentUTM[5];
+
+        tob[0] = new StudentUTM("E", "E", 7);
+        tob[1] = new StudentUTM("D", "D", 1);
+        tob[2] = new StudentUTM("B", "B", 5);
+        tob[3] = new StudentUTM("A", "A", 2);
+        tob[4] = new StudentUTM("C", "C", 3);
+     
+
+        // Name Sort
+        Arrays.sort(tob, new SortName());
+
+        for (StudentUTM s : tob) {
+            System.out.println(s);
+        }
+
+        System.out.println();
+        Arrays.sort(tob, new SortYear());
+
+        for (StudentUTM s : tob) {
+            System.out.println(s);
+        }
+    }
+
+}
+
+
+
+package javaapplication9;
+
+public class StudentUTM {
+    private String name, fname;
+    private int year;
+    private static String univ = "UTM";
+
+    public StudentUTM() {
+        this("###", "####", 0);
+    }
+
+    public StudentUTM(String name, String fname, int year) {
+        this.name = name;
+        this.fname = fname;
+        this.year = year;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static String getUniv() {
+        return univ;
+    }
+
+    public static void setUniv(String univ) {
+        StudentUTM.univ = univ;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StudentUTM other = (StudentUTM) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if ((this.fname == null) ? (other.fname != null) : !this.fname.equals(other.fname)) {
+            return false;
+        }
+        if (this.year != other.year) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 37 * hash + (this.fname != null ? this.fname.hashCode() : 0);
+        hash = 37 * hash + this.year;
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + fname + " " + year;
+    }
+}
+
+
+package javaapplication9;
+
+import java.util.Comparator;
+
+public class SortName implements Comparator {
+
+    public int compare(Object o1, Object o2) {
+
+        StudentUTM a = (StudentUTM) o1;
+        StudentUTM b = (StudentUTM) o2;
+        if (a.getName().compareTo(b.getName()) == 0) {
+           return a.getFname().compareTo(b.getFname());
+        }
+        return a.getName().compareTo(b.getName());
+    }
+
+
+}
+
+
+package javaapplication9;
+
+import java.util.Comparator;
+
+public class SortYear implements Comparator{
+
+     @Override
+     public int compare(Object o1, Object o2) {
+
+        StudentUTM a = (StudentUTM) o1;
+        StudentUTM b = (StudentUTM) o2;
+        if (a.getYear() < b.getYear()) {
+           return -1;
+        } else if (a.getYear() == b.getYear()) {
+           return 0;
+        }
+        return 1;
+    }
+}
