@@ -244,3 +244,158 @@ public interface OpM {
         int op(int a, int b);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// html
+
+<html>
+<head>
+	<title></title>
+<script>
+t=new Array("ian","feb","mar","apr","mai","iun","iul","aug","sep","oct","nov","dec");
+function test(y)
+{
+for(i=0;i<12;i++)
+	if(y[i].selected)
+		l=t[i];
+
+
+mesaj="luna este: "+l;
+
+    if (document.getElementById("al").checked) {
+		alert(mesaj);
+	}else if (document.getElementById("mw").checked) {
+		document.write(mesaj);
+	} else {
+	   document.getElementById("mesaj").innerHTML = mesaj;
+	}
+}	
+
+ 
+</script>
+
+<style>
+label {
+	font-size: 22px;
+	color: green;
+}
+</style>
+</head>
+<body>
+<form name="f">
+
+<label>alert</label>
+<input type="radio" name="menu" value="2" id="al" checked="checked">
+<br/>
+
+<label>document.getElementById</label>
+<input type="radio" name="menu" value="1" id="mi" checked="checked">
+<br/>
+<label>document.write</label>
+<input type="radio" name="menu" value="0" id="mw"/>
+
+<br/>
+<br/>
+
+<script>
+document.write("<select name='luna'>");
+for(i=1;i<=12;i++)
+{k=i-1;
+	document.write("<option value='"+i+"'>"+t[k]+"</option>");
+}
+document.write("</select>");
+</script>
+
+
+
+
+<input type="button" name="b1" value="verifica lista simpla" onclick="test(luna)"> <br>
+<input type="reset" name="b2">
+</form>
+<div id="mesaj"></div>
+</body>
+</html>
+
+
+
+<html>
+<head>
+<title>Obiecte</title>
+</head>
+
+<script>
+function deschide_fereastra() 
+{
+	fer=window.open("ex1.html","_blank","top=400,left=600,width=200, height=200,menubar=yes,toolbar=yes,scrollbars=yes,resizable=no")
+	
+}
+
+function window_fory() {
+	for(i=0;i<340;i++) {
+		fer.moveTo(50,i*2);
+		fer.focus();
+	}
+}
+function window_forx() {
+	for(i=0;i<470;i++) {
+		fer.moveTo(i*2,50);
+		fer.focus();
+	}
+}
+function window_forx_y() {
+	for(i=0;i<340;i++) {
+		fer.moveTo(i*2,i*2);
+		fer.focus();
+	}
+}
+
+function window_fory2() {
+	for(i=340;i>=50;i--) {
+		fer.moveTo(50,i*2);
+		fer.focus();
+	}
+}
+function window_forx2() {
+	for(i=470;i>=50;i--) {
+		fer.moveTo(i*2,50);
+		fer.focus();
+	}
+}
+function window_forx_y2() {
+	for(i=340;i>=50;i--) {
+		fer.moveTo(i*2,i*2);
+		fer.focus();
+	}
+}
+
+</script>
+<input type="button" value="deschide o fereastra noua" onClick="deschide_fereastra();"><br><br>
+<input type="button" value="inchide fereastra deschisa" onClick="fer.close();"><br><br>
+
+<input type="button" value="moveTo_y" onClick="window_fory();">
+<input type="button" value="moveTo_x" onClick="window_forx();">
+<input type="button" value="moveTo_xy" onClick="window_forx_y();">
+<br/><br/>
+<input type="button" value="moveTo_y2" onClick="window_fory2();">
+<input type="button" value="moveTo_x2" onClick="window_forx2();">
+<input type="button" value="moveTo_xy2" onClick="window_forx_y2();">
+
+</body>
+</html>
