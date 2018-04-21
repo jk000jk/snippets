@@ -1,3 +1,5 @@
+
+// entropy 
 package javaapplication4;
 
 import java.io.*;
