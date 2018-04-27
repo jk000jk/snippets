@@ -114,3 +114,125 @@ public class Main {
     }
 
 }
+
+
+// Huffman
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+class HuffmanNode {
+
+    int data;
+    char c;
+
+    HuffmanNode left;
+    HuffmanNode right;
+}
+
+class MyComparator implements Comparator<HuffmanNode> {
+    public int compare(HuffmanNode x, HuffmanNode y)
+    {
+
+        return x.data - y.data;
+    }
+}
+
+public class Huffman {
+    public static void printCode(HuffmanNode root, String s)
+    {
+        if (root.left == null && root.right == null
+                && (Character.isLetter(root.c) || root.c == ' ')) {
+
+            System.out.println(root.c + ":" + s);
+
+            return;
+        }
+
+        // daca mergem stanga adaugam "0"
+        // daca mergem dreapta adaugam "1"
+        printCode(root.left, s + "0");
+        printCode(root.right, s + "1");
+    }
+
+    public static void main(String[] args)
+    {
+
+        HashMap<Character, Integer> hmap = new HashMap<Character, Integer>();
+        File file = new File("./file.txt");
+        char[] chars = new char[(int) file.length()];
+        try {
+            FileReader reader = new FileReader(file);
+            reader.read(chars);
+            reader.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        for (int i = 0; i < chars.length; i++) {
+            if (hmap.containsKey(chars[i])) {
+                hmap.put(chars[i], hmap.get(chars[i]) + 1);
+            } else {
+                hmap.put(chars[i], 1);
+            }
+        }
+
+        for (Character key : hmap.keySet()) {
+            System.out.println(key + ": "
+                    + hmap.get(key)/(float)chars.length * 100 + "%");
+        }
+
+        PriorityQueue<HuffmanNode> q
+                = new PriorityQueue<HuffmanNode>(hmap.size(), new MyComparator());
+
+        for (Character key : hmap.keySet()) {
+
+            HuffmanNode hn = new HuffmanNode();
+
+            hn.c = key;
+            hn.data = hmap.get(key);
+
+            hn.left = null;
+            hn.right = null;
+
+            q.add(hn);
+        }
+
+        HuffmanNode root = null;
+
+
+        // Aici vom extrage cele două valori minime
+        while (q.size() > 1) {
+
+            // prima min val
+            HuffmanNode x = q.peek();
+            q.poll();
+
+            // a doua
+            HuffmanNode y = q.peek();
+            q.poll();
+
+            HuffmanNode f = new HuffmanNode();
+
+            // suma celor doua noduri
+            f.data = x.data + y.data;
+            f.c = '-';
+
+            f.left = x;
+            f.right = y;
+
+            root = f;
+
+            q.add(f);
+        }
+
+        // print
+        printCode(root, "");
+    }
+}
+
