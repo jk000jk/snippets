@@ -239,69 +239,170 @@ public class Huffman {
 
 
 // Cod Hamming
+
 import java.util.Scanner;
 
+class Hamming {
+    public static void main(String args[]) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Mesaj: "); // ex. 1001
+        String mesaj = scan.next();
+        int a[] = new int[mesaj.length()];
 
-public class Hamming {
+        for (int i = 0; i < mesaj.length(); i++) {
+            a[i] = Character.getNumericValue(mesaj.charAt(i));
+        }
 
-    public static void main(String[] args) {
-        Scanner ip = new Scanner(System.in);
-        System.out.print("Mesaj: "); // eg. 1001
-        String msg = ip.next();
-        int r = 0, m = msg.length();
-        // calculam numarul de biti de paritate necesar folosind m+r+1<=2^r
-        while (true) {
-            if (m + r + 1 <= Math.pow(2, r)) {
-                break;
-            }
-            r++;
-        }
-        System.out.println("Nr. de biti de paritate necesar: " + r);
-        int transLength = msg.length() + r, temp = 0, temp2 = 0, j = 0;
-        int transMsg[] = new int[transLength + 1]; //+1 pt ca incepe cu 1
-        for (int i = 1; i <= transLength; i++) {
-            temp2 = (int) Math.pow(2, temp);
-            if (i % temp2 != 0) {
-                transMsg[i] = Integer.parseInt(Character.toString(msg.charAt(j)));
-                j++;
-            } else {
-                temp++;
-            }
-        }
-        for (int i = 1; i <= transLength; i++) {
-            System.out.print(transMsg[i]);
+        int b[] = generateCode(a);
+
+        System.out.print("Codul Hamming: ");
+        for (int i = 0; i < b.length; i++) {
+            System.out.print(b[i]);
         }
         System.out.println();
 
-        for (int i = 0; i < r; i++) {
-            int smallStep = (int) Math.pow(2, i);
-            int bigStep = smallStep * 2;
-            int start = smallStep, checkPos = start;
-            System.out.println("Calculam bit-ul de paritate pt. pozitia: " + smallStep);
-            System.out.print("Biti de verificat: ");
-            while (true) {
-                for (int k = start; k <= start + smallStep - 1; k++) {
-                    checkPos = k;
-                    System.out.print(checkPos + " ");
-                    if (k > transLength) {
-                        break;
-                    }
-                    transMsg[smallStep] ^= transMsg[checkPos];
-                }
-                if (checkPos > transLength) {
-                    break;
-                } else {
-                    start = start + bigStep;
-                }
+        // Differenta in dintre original si noua array e numarul de biti de paritate adaugat.
+        System.out.print("Pozitia bit-ului eroare: ");
+        int error = scan.nextInt();
+        if (error != 0) {
+            b[error - 1] = (b[error - 1] + 1) % 2;
+        }
+        System.out.print("Codul trimis: ");
+        for (int i = 0; i < b.length; i++) {
+            System.out.print(b[i]);
+        }
+        System.out.println();
+        receive(b, b.length - a.length);
+    }
+
+    static int[] generateCode(int a[]) {
+        // rezultatul returnat
+        int b[];
+
+        // gasim nr. de biti de paritate necesar:
+        int i = 0, parity_count = 0, j = 0, k = 0;
+        while (i < a.length) {
+            // 2^(biti de paritate) trebuie sa fie egal cu positia curenta
+            // pozitia curenta este (nr. de biti traversati + nr. de biti de paritate + 1).
+            // +1 e necesar pt ca array-ul incepe de la 0 insa noi incepem de la 1.
+
+            if (Math.pow(2, parity_count) == i + parity_count + 1) {
+                parity_count++;
+            } else {
+                i++;
             }
-            System.out.println();
         }
 
-        System.out.print("Codul Hamming: ");
-        for (int i = 1; i <= transLength; i++) {
-            System.out.print(transMsg[i]);
+        // Lungimea "b" este lungimea datelor originale (a) + numărul biților de paritate.
+        b = new int[a.length + parity_count];
+
+        // Inițializam matricea cu "2" pentru a indica o valoare "ne-setata" în locațiile de paritate:
+
+        for (i = 1; i <= b.length; i++) {
+            if (Math.pow(2, j) == i) {
+                // Am gasit un bit de paritate
+                // Ajustam cu (-1) pentru a ține cont de indicii matricei pornind de la 0 în loc de 1.
+
+                b[i - 1] = 2;
+                j++;
+            } else {
+                b[k + j] = a[k++];
+            }
+        }
+        for (i = 0; i < parity_count; i++) {
+            // Setam biti de paritate pari:
+
+            b[((int) Math.pow(2, i)) - 1] = getParity(b, i);
+        }
+        return b;
+    }
+
+    static int getParity(int b[], int power) {
+        int parity = 0;
+        for (int i = 0; i < b.length; i++) {
+            if (b[i] != 2) {
+                // Daca "i" nu conține o valoare ne-setata
+                // Vom salva acea valoare a indicelui in k, o vom mari cu 1,
+                // Apoi convertim in binar:
+
+                int k = i + 1;
+                String s = Integer.toBinaryString(k);
+
+                // Daca bitul la locația 2 ^ (putere) a valorii binare a indexului este 1,
+                // Apoi trebuie să verificăm valoarea stocată în acea locatie.
+                // Verificam daca este 1 sau 0, vom calcula valuarea de paritate.
+
+                int x = ((Integer.parseInt(s)) / ((int) Math.pow(10, power))) % 10;
+                if (x == 1) {
+                    if (b[i] == 1) {
+                        parity = (parity + 1) % 2;
+                    }
+                }
+            }
+        }
+        return parity;
+    }
+
+    static void receive(int a[], int parity_count) {
+        // Primeste un code Hamming in array-ul 'a'.
+        // We also require the number of parity bits added to the original data.
+        // Now it must detect the error and correct it, if any.
+
+        int power;
+        // Vom folosi "power" pentru a găsi bitii corecti pentru a verifica paritatea.
+
+        int parity[] = new int[parity_count];
+        // stocheaza valorile verificarilor de paritate.
+
+        String syndrome = new String();
+        // 'syndrome' sir va fi folosit pentru a stoca valoarea int-ul locatiei de eroare.
+
+        for (power = 0; power < parity_count; power++) {
+
+            for (int i = 0; i < a.length; i++) {
+                // Extragem bit-ul 2 ^ (putere):
+
+                int k = i + 1;
+                String s = Integer.toBinaryString(k);
+                int bit = ((Integer.parseInt(s)) / ((int) Math.pow(10, power))) % 10;
+                if (bit == 1) {
+                    if (a[i] == 1) {
+                        parity[power] = (parity[power] + 1) % 2;
+                    }
+                }
+            }
+            syndrome = parity[power] + syndrome;
+        }
+
+        System.out.println();
+        System.out.print("Codul primit: ");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i]);
+        }
+        System.out.println();
+        int error_location = Integer.parseInt(syndrome, 2);
+        if (error_location != 0) {
+            System.out.println("Eroarea este la pozitia: " + error_location);
+            a[error_location - 1] = (a[error_location - 1] + 1) % 2;
+            System.out.print("Codul corectat: ");
+            for (int i = 0; i < a.length; i++) {
+                System.out.print(a[i]);
+            }
+            System.out.println();
+        } else {
+            System.out.print("Nu este nici o eroarea in codul primit");
+        }
+
+        // Extragem datele originale din codul primit (si corectat):
+        System.out.print("Mesajul original trimis: ");
+        power = parity_count - 1;
+        for (int i = a.length; i > 0; i--) {
+            if (Math.pow(2, power) != i) {
+                System.out.print(a[i - 1]);
+            } else {
+                power--;
+            }
         }
         System.out.println();
     }
-
 }
