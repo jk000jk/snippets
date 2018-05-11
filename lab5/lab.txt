@@ -1,4 +1,3 @@
-
 /*
  *  JDBC java.sql
  *      -  connectarea la o db
@@ -56,9 +55,16 @@
 
 package javaapplication1;
 
+import java.sql.*;
+
 public class JavaApplication1 {
 
     public static void main(String[] args) {
-       
+        try {
+       Connection conn = 
+               DriverManager.getConnection("jdbc:derby://localhost:1527/AngajatiFirma", "root", "12345");
+       } catch (SQLException ex) {
+           System.out.println(ex.getMessage());
+       }
     }
 }
