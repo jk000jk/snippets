@@ -63,7 +63,14 @@ public class JavaApplication1 {
         try {
        Connection conn = 
                DriverManager.getConnection("jdbc:derby://localhost:1527/AngajatiFirma", "root", "12345");
-       } catch (SQLException ex) {
+        Statement pst = conn.createStatement();
+        String sq1 = "SELECT * FROM Angajati WHERE salariu >= 3000";
+        ResultSet res = pst.executeQuery(sq1);
+        while (res.next()) {
+            System.out.println(res.getString("CNP")  + " " + res.getString(2) 
+                    + " " + res.getInt("Varsta") + res.getDouble("Salariu"));
+        }
+        } catch (SQLException ex) {
            System.out.println(ex.getMessage());
        }
     }
