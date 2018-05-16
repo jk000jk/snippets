@@ -167,7 +167,6 @@ mysqli_close($con);
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -309,7 +308,7 @@ mysqli_close($con);
     <div class="container">
         <section>
             <header>
-                <h2>HTMl5, Jquery, CSS3</h2>
+                <h2>Aplicatie Practica - Chelaru Marius 202</h2>
             </header>
             <h3>Ce este nou in HTML5?</h3>
             <p>
