@@ -75,3 +75,90 @@ public class JavaApplication1 {
        }
     }
 }
+
+
+
+
+<?php
+
+$con = mysqli_connect("localhost", "id5774869_root", "password", "id5774869_student");
+
+if (mysqli_connect_error()) {
+	echo "Connect Failure" . mysqli_connect_error();
+	die();
+}
+
+mysqli_select_db($con, "id5774869_student");
+
+$cuv = $_POST["cuv"];
+$sql = "SELECT * FROM dictionar WHERE cuvant_en=\"$cuv\" OR cuvant_ro = \"$cuv\" LIMIT 1;";
+
+if (!($y = mysqli_query($con, $sql)) {
+	echo "Fail";
+} 
+
+while ($row = mysqli_fetch_assoc(y)) {
+	echo $row["cuvant_ro"];
+} 
+
+mysqli_free_result($result);
+
+mysqli_close($con);
+
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dictionar</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+   <h3>Dictionar</h3>
+   <br/>
+   <form action="formular.php" method="POST" style="max-width:600px" onSubmit="handleSubmit()"/>
+		<div class="form-group">
+			<label>Cuvant RO</label>
+			<input type="text" name="c_ro" class="form-control" />
+		</div>
+		<div class="form-group">
+			<label>Cuvant EN</label>
+			<input type="text" name="c_en" class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+   </form>
+</div>
+</body>
+</html> 
+
+
+<?php
+
+$con = mysqli_connect("localhost", "id5774869_root", "password", "id5774869_student");
+
+if (mysqli_connect_error()) {
+	echo "Failled to connect to db" . mysqli_connect_error();
+	die();
+}
+
+mysqli_select_db($con, "id5774869_student");
+
+$c_ro = $_POST["c_ro"];
+$c_en = $_POST["c_en"];
+
+$sql = "INSERT INTO dictionar (cuvant_ro, cuvant_en) VALUES('$c_ro', '$c_en')";
+
+if (mysqli_query($con, $sql)) {
+	echo "Success";
+} else {
+	echo "Fail";
+}
+
+mysqli_close($con);
