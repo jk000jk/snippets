@@ -164,7 +164,9 @@ void problema14()
 void problema15()
 {
     int a,b,c;
+    cout<<"a = ";
     cin>>a;
+    cout<<"b = ";
     cin>>b;
      if(a>b)
         {
@@ -174,10 +176,10 @@ void problema15()
         }
         while(a<=b)
         {
-            cout<<"a="<<a;
+            cout<<"a= "<<a << " ";
             a=a*4;
         }
-     cout<<"a="<<a;
+     cout<<"a = "<<a;
 }
 void problema16()
 {
@@ -509,209 +511,162 @@ void problema50()
 int main()
 {
     int x;
-    cout<<"Problema: ";
-    cin>>x;
-    switch(x)
-    {
-    case 1:
-        cout<<"Problema 1:"<<endl;
-        problema1();
-        break;
-    case 2:
-        cout<<endl<<"Problema 2:"<<endl;
-        problema2();
-        break;
-    case 3:
-        cout<<endl<<"Problema 3:"<<endl;
-        problema3();
-        break;
-    case 4:
-        cout<<endl<<"Problema 4:"<<endl;
-        problema4();
-        break;
-    case 5:
-        cout<<endl<<"Problema 5:"<<endl;
-        problema5();
-        break;
-    case 6:
-        cout<<"Problema 6:"<<endl;
-        problema6();
-        break;
-    case 7:
-        cout<<endl<<"Problema 7:"<<endl;
-        problema7();
-        break;
-    case 8:
-        cout<<endl<<"Problema 8:"<<endl;
-        problema8();
-        break;
-    case 9:
-        cout<<endl<<"Problema 9:"<<endl;
-        problema9();
-        break;
-    case 10:
-        cout<<endl<<"Problema 10:"<<endl;
-        problema10();
-        break;
-    case 11:
-        cout<<endl<<"Problema 11:"<<endl;
-        problema11();
-        break;
-    case 12:
-        cout<<endl<<"Problema 12:"<<endl;
-        problema12();
-        break;
-    case 13:
-        cout<<endl<<"Problema 13:"<<endl;
-        problema13();
-        break;
-    case 14:
-        cout<<endl<<"Problema 14:"<<endl;
-        problema14();
-        break;
-    case 15:
-        cout<<endl<<"Problema 15:"<<endl;
-        problema15();
-        break;
-    case 16:
-        cout<<endl<<"Problema 16:"<<endl;
-        problema16();
-        break;
-    case 17:
-        cout<<endl<<"Problema 17:"<<endl;
-        problema17();
-        break;
-    case 18:
-        cout<<endl<<"Problema 18:"<<endl;
-        problema18();
-        break;
-    case 19:
-        cout<<endl<<"Problema 19:"<<endl;
-        problema19();
-        break;
-    case 20:
-        cout<<endl<<"Problema 20:"<<endl;
-        problema20();
-        break;
-    case 21:
-        cout<<endl<<"Problema 21:"<<endl;
-        problema21();
-        break;
-    case 22:
-        cout<<endl<<"Problema 22:"<<endl;
-        problema22();
-        break;
-    case 23:
-        cout<<endl<<"Problema 23:"<<endl;
-        problema23();
-        break;
-    case 24:
-        cout<<endl<<"Problema 24:"<<endl;
-        problema24();
-        break;
-    case 25:
-        cout<<endl<<"Problema 25:"<<endl;
-        problema25();
-        break;
-    case 26:
-        cout<<endl<<"Problema 26:"<<endl;
-        problema26();
-        break;
-    case 27:
-        cout<<endl<<"Problema 27:"<<endl;
-        problema27();
-        break;
-    case 28:
-        cout<<endl<<"Problema 28:"<<endl;
-        problema28();
-        break;
-    case 29:
-        cout<<endl<<"Problema 29:"<<endl;
-        problema29();
-        break;
-    case 30:
-        cout<<endl<<"Problema 30:"<<endl;
-        problema30();
-        break;
-    case 31:
-        cout<<endl<<"Problema 31:"<<endl;
-        problema31();
-        break;
-    case 32:
-        cout<<endl<<"Problema 32:"<<endl;
-        problema32();
-        break;
-    case 33:
-        cout<<endl<<"Problema 33:"<<endl;
-        problema33();
-        break;
-    case 34:
-        cout<<endl<<"Problema 34:"<<endl;
-        problema34();
-        break;
-    case 35:
-        cout<<endl<<"Problema 35:"<<endl;
-        problema35();
-        break;
-    case 36:
-        cout<<endl<<"Problema 36:"<<endl;
-        problema36();
-        break;
-    case 37:
-        cout<<endl<<"Problema 37:"<<endl;
-        problema37();
-        break;
-    case 38:
-        cout<<endl<<"Problema 38:"<<endl;
-        problema38();
-        break;
-    case 39:
-        cout<<endl<<"Problema 39:"<<endl;
-        problema39();
-        break;
-    case 40:
-        cout<<endl<<"Problema 40:"<<endl;
-        problema40();
-        break;
-    case 41:
-        cout<<endl<<"Problema 41:"<<endl;
-        problema41();
-        break;
-    case 42:
-        cout<<endl<<"Problema 42:"<<endl;
-        problema42();
-        break;
-    case 43:
-        cout<<endl<<"Problema 43:"<<endl;
-        problema43();
-        break;
-    case 44:
-        cout<<endl<<"Problema 44:"<<endl;
-        problema44();
-        break;
-    case 45:
-        cout<<endl<<"Problema 45:"<<endl;
-        problema45();
-        break;
-    case 46:
-        cout<<endl<<"Problema 46:"<<endl;
-        problema46();
-        break;
-    case 47:
-        cout<<endl<<"Problema 47:"<<endl;
-        problema47();
-        break;
-    case 48:
-        cout<<endl<<"Problema 48:"<<endl;
-        problema48();
-        break;
-    case 49:
-        cout<<endl<<"Problema 49:"<<endl;
-        problema49();
-        break;
-    case 50:
-        cout<<endl<<"Problema 50:"<<endl;
-        problema50();
-        break;
-    }
+    do {
+        cout<<"Problema: ";
+        cin>>x;
+        switch(x)
+        {
+        case 1:
+            problema1();
+            break;
+        case 2:
+            problema2();
+            break;
+        case 3:
+            problema3();
+            break;
+        case 4:
+            problema4();
+            break;
+        case 5:
+            problema5();
+            break;
+        case 6:
+            problema6();
+            break;
+        case 7:
+            problema7();
+            break;
+        case 8:
+            problema8();
+            break;
+        case 9:
+            problema9();
+            break;
+        case 10:
+            problema10();
+            break;
+        case 11:
+            problema11();
+            break;
+        case 12:
+            problema12();
+            break;
+        case 13:
+            problema13();
+            break;
+        case 14:
+            problema14();
+            break;
+        case 15:
+            problema15();
+            break;
+        case 16:
+            problema16();
+            break;
+        case 17:
+            problema17();
+            break;
+        case 18:
+            problema18();
+            break;
+        case 19:
+            problema19();
+            break;
+        case 20:
+            problema20();
+            break;
+        case 21:
+            problema21();
+            break;
+        case 22:
+            problema22();
+            break;
+        case 23:
+            problema23();
+            break;
+        case 24:
+            problema24();
+            break;
+        case 25:
+            problema25();
+            break;
+        case 26:
+            problema26();
+            break;
+        case 27:
+            problema27();
+            break;
+        case 28:
+            problema28();
+            break;
+        case 29:
+            problema29();
+            break;
+        case 30:
+            problema30();
+            break;
+        case 31:
+            problema31();
+            break;
+        case 32:
+            problema32();
+            break;
+        case 33:
+            problema33();
+            break;
+        case 34:
+            problema34();
+            break;
+        case 35:
+            problema35();
+            break;
+        case 36:
+            problema36();
+            break;
+        case 37:
+            problema37();
+            break;
+        case 38:
+            problema38();
+            break;
+        case 39:
+            problema39();
+            break;
+        case 40:
+            problema40();
+            break;
+        case 41:
+            problema41();
+            break;
+        case 42:
+            problema42();
+            break;
+        case 43:
+            problema43();
+            break;
+        case 44:
+            problema44();
+            break;
+        case 45:
+            problema45();
+            break;
+        case 46:
+            problema46();
+            break;
+        case 47:
+            problema47();
+            break;
+        case 48:
+            problema48();
+            break;
+        case 49:
+            problema49();
+            break;
+        case 50:
+            problema50();
+            break;
+        }
+        cout << endl << endl;
+    } while (x != -1);
 }
