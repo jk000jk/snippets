@@ -21,3 +21,39 @@
 </div>
 </body>
 </html>
+
+
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Ex 5</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <script>
+	function culoare() {
+		var azi = new Date();
+		var secunda = parseInt(azi.getSeconds());
+		x = secunda % 6;	
+		switch(x) {
+			case 0:document.bgColor="yellow";break;
+			case 1:document.bgColor="white";break;
+			case 2:document.bgColor="blue";break;
+			case 3:document.bgColor="red";break;
+			case 4:document.bgColor="green";break;
+			case 4:document.bgColor="pink";break;
+		}
+
+		setInterval(culoare, 1000);
+	}
+  </script>
+</head>
+
+<body onload=culoare()>
+    <p>mesaj</p>
+	<hr/>
+</body>
+</html>
